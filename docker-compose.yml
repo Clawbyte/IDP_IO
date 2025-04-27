@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=idp2025
+      - MONGO_INITDB_ROOT_PASSWORD=idp2025
+    command: ["mongod", "--quiet"]
+    networks:
+      - app-network
+
+  backend:
+    build: ./io-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://idp2025:idp2025@mongo:27017/idp2025?authSource=admin
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
