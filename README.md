@@ -1,6 +1,8 @@
 # IDP project: microservice for interaction with database
 
 ## Usage
+* Before running anything, make sure you created the network with `docker network create app-network`
+* You can check if the network exists with `docker network ls`
 * To use the IO service, simply run `docker-compose up --build` inside this folder
 * Running the server locally will not work, always run through docker
 * To use MongoDB Compass and inspect the database, simply create a new connection
