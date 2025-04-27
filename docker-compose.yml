@@ -12,7 +12,7 @@ services:
     networks:
       - app-network
 
-  backend:
+  io-backend:
     build: ./io-backend
     ports:
       - "3000:3000"

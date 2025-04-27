@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import { MongoClient } from 'mongodb'
 import mongoose, { Schema } from 'mongoose'
 import User from './models/user.schema'
+import bcrypt from 'bcryptjs'
 
 const app = express()
 const port = 3000
@@ -44,7 +45,13 @@ app.post('/user/valid', async (req: Request, res: Response) => {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
-        res.json({ valid: user?.password == password });
+        if (user == null)
+        {
+            res.status(400).json({ valid: false });
+            return;
+        }
+        const valid = await bcrypt.compare(password, user.password);
+        res.json({ valid });
     } catch (err) {
         res.status(400).json({message: "Error"});
     }
