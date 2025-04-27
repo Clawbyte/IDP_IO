@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express'
 import { MongoClient } from 'mongodb'
 import mongoose, { Schema } from 'mongoose'
-import Test from './models/test.schema'
+import User from './models/user.schema'
 
 const app = express()
 const port = 3000
-const mongodb = process.env.MONGO_URL || 'mongodb://mongo:27017/idp2025'
+const mongodb = process.env.MONGO_URL || 'mongodb://localhost:27017/idp2025'
+
+app.use(express.json());
 
 app.listen(port, async () => {
     console.log(`Microservice running at http://localhost:${port}`)
@@ -17,12 +19,33 @@ app.listen(port, async () => {
     }
 })
 
-// Endpoint example
-app.get('/', async (req: Request, res: Response) => {
-    let newTest = new Test({ eggs: 6, drink: "Coffee"})
-    await newTest.save();
 
-    const test = await Test.find()
+// Add user route
+app.post('/user', async (req: Request, res: Response) => {
+    try {
+        const { username, password } = req.body;
+        const user = new User({ username, password });
+        await user.save();
+        res.json(user);
+    } catch (err) {
+        res.status(400).json({ message: "Error" });
+    }
+})
 
-    res.json(test)
+// Check if user exists route
+app.get('/user/:username', async (req: Request<{ username: string }>, res: Response) => {
+    const { username } = req.params;
+    const existingUser = await User.findOne({ username });
+    res.json({ exists: existingUser != null });    
+})
+
+// Check if user-password match route
+app.post('/user/valid', async (req: Request, res: Response) => {
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+        res.json({ valid: user?.password == password });
+    } catch (err) {
+        res.status(400).json({message: "Error"});
+    }
 })
