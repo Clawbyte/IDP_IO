@@ -14,4 +14,4 @@ with `mongodb://idp2025:idp2025@localhost:27018/idp2025?authSource=admin`
 * Added routes for user register and login validation
 
 ## Technologies
-Express, MongoDB, MongoDB Compass, Typescript, Docker, Docker Compose
+Express, Typescript, MongoDB, MongoDB Compass, Docker, Docker Compose, Docker Swarm
