@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import { MongoClient } from 'mongodb'
 import mongoose, { Schema } from 'mongoose'
 import User from './models/user.schema'
+import Book from './models/book.schema'
 import bcrypt from 'bcryptjs'
 
 const app = express()
