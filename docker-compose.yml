@@ -11,9 +11,17 @@ services:
     command: ["mongod", "--quiet"]
     networks:
       - app-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 2g
+          cpus: "1"
 
   io-backend:
-    build: io-backend:latest
+    image: io-backend:latest
     ports:
       - "3000:3000"
     environment:
@@ -22,6 +30,14 @@ services:
       - mongo
     networks:
       - app-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 1g
+          cpus: "1"
 
 volumes:
   mongo-data:
