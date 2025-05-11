@@ -12,6 +12,7 @@ with `mongodb://idp2025:idp2025@localhost:27018/idp2025?authSource=admin`
 ## Functionality
 * Added database and backend functionality, packaged with Docker Compose 
 * Added routes for user register and login validation
+* Added routes for library management
 
 ## Technologies
 Express, Typescript, MongoDB, MongoDB Compass, Docker, Docker Compose, Docker Swarm

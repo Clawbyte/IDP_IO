@@ -26,6 +26,7 @@ services:
       - "3000:3000"
     environment:
       - MONGO_URL=mongodb://idp2025:idp2025@mongo:27017/idp2025?authSource=admin
+      - AUTH_URL=http://auth-backend:3001
     depends_on:
       - mongo
     networks:
