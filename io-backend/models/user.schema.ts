@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 
-// Schema example
 const userSchema = new Schema({
     username: {
       type: String,
@@ -13,7 +12,7 @@ const userSchema = new Schema({
       type: String,
       min: [8, "Too few characters for username"],
       required: [true, "Password required"],
-    },
+    }
 });
 
 const User = mongoose.model("User", userSchema);
