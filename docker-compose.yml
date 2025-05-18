@@ -21,7 +21,7 @@ services:
           cpus: "1"
 
   io-backend:
-    image: io-backend:latest
+    image: clawbyte/io-backend:latest
     ports:
       - "3000:3000"
     environment:
