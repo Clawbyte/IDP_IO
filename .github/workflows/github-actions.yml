@@ -1,9 +1,9 @@
-name: CI/CD master
+name: CI/CD main
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   docker-build:
