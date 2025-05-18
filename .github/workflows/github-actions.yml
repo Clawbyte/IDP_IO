@@ -21,11 +21,3 @@ jobs:
 
       - name: Push docker image
         run: docker push ${{ secrets.REGISTRY_IMAGE }}
-
-  deploy:
-    name: Deploy
-    needs: docker-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger webhook
-        run: curl -XPOST http://81.196.141.53:8000/portainer/api/webhooks/ed31282a-6924-4dc3-a07c-052c44b218b4
